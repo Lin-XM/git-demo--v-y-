@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <button v-on2:click="x">点我</button>
+      <button v-y>点我</button>
+    </div>
+    <script>
+      Vue.config.productionTip = false;
+      Vue.directive("on2", {
+        inserted: function (el, info) {
+          // el 就是容器对象, info指的就是
+          el.addEventListener(info.arg, info.value);
+        },
+        // 清理监听事件
+        unbind(el, info) {
+          el.removeEventListener(info.arg, info.value);
+        },
+      });
+      new Vue({
+        el: "#root",
+        data: {
+          name: "xiaoming",
+        },
+        methods: {
+          x() {
+            console.log("我是xxx");
+          },
+        },
+        directives: {
+          y: {
+            inserted(el) {
+              el.addEventListener("click", () => {
+                console.log("我是yyyy");
+              });
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <span v-x>我是谁：{{name}},我爱打游戏。</span><br />
+      <span v-y>我是谁：{{name}},我爱干饭。</span>
+    </div>
+    <script>
+      Vue.config.productionTip = false;
+      Vue.directive("x", {
+        inserted: function (el) {
+          // el 就是容器对象
+          el.addEventListener("click", () => {
+            console.log("x");
+          });
+        },
+      });
+      new Vue({
+        el: "#root",
+        data: {
+          name: "xiaoming",
+        },
+        directives: {
+          y: {
+            inserted(el) {
+              el.addEventListener("click", () => {
+                console.log("我我是yyyy");
+              });
+            },
+          },
+        },
+      });
+      methods: {
+      }
+    </script>
+  </body>
+</html>
